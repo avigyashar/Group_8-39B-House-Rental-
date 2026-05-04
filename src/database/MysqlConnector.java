@@ -1,16 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package database;
+package Database;
+
+import database.db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.*;
 
-/**
- *
- * @author Safal
- */
 public class MysqlConnector implements db {
     @Override
     public Connection openConnection(){
@@ -36,12 +31,85 @@ public class MysqlConnector implements db {
 
            } catch (SQLException e) {
             System.out.println("Connection error: " + e.getMessage());
-            return null;
+          
+
+        }  return null;
+
+    }
+
+    @Override
+    public void closeConnection(Connection conn) {
+
+        try{
+
+            if(conn != null && !conn.isClosed() ){
+
+                conn.close();
+
+                System.out.println("Connection close");
+
+            }
+
+            
+
+        }catch(SQLException e){
+
+            System.out.println(e);
+
+            
 
         }
 
     }
 
 
+
+    @Override
+    public ResultSet runQuery(Connection conn, String query) {
+
+       try{
+
+           Statement stmp = conn.createStatement();
+
+           ResultSet result = stmp.executeQuery(query);
+
+           return result;
+
+       
+
+       }catch (SQLException e){
+
+           System.out.println(e);
+
+           return null;
+
+       }
+
+    }
+
+   
+
+    @Override
+    public int excecuteUpdate(Connection conn, String query) {
+
+      try{
+
+          Statement stmp = conn.createStatement();
+
+          int result = stmp.executeUpdate(query);
+
+          return result;
+
+          
+
+      }catch(SQLException e){
+
+          System.out.println(e);
+
+          return -1;
+
+      }
+
+    }
+
 }
-    

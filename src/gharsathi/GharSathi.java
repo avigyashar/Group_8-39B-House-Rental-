@@ -3,8 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package gharsathi;
-import database.MysqlConnector;
+
+import Database.MysqlConnector;
 import database.db;
+
 /**
  *
  * @author Safal

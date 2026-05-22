@@ -180,7 +180,7 @@ public class DashBoard extends javax.swing.JFrame {
         Explore_Button.setText("Explore Houses");
         Explore_Button.addActionListener(this::Explore_ButtonActionPerformed);
         jPanel1.add(Explore_Button);
-        Explore_Button.setBounds(120, 100, 190, 50);
+        Explore_Button.setBounds(90, 110, 190, 50);
 
         Info_text.setBackground(new java.awt.Color(252, 238, 222));
         Info_text.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -188,7 +188,7 @@ public class DashBoard extends javax.swing.JFrame {
         Info_text.setBorder(null);
         Info_text.addActionListener(this::Info_textActionPerformed);
         jPanel1.add(Info_text);
-        Info_text.setBounds(50, 10, 370, 30);
+        Info_text.setBounds(30, 10, 370, 40);
 
         Info_text2.setBackground(new java.awt.Color(252, 238, 222));
         Info_text2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -203,7 +203,7 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel3.setBounds(630, 0, 770, 200);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(40, 200, 1420, 200);
+        jPanel1.setBounds(60, 200, 1400, 200);
 
         jLabel36.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel36.setText("House Rental ");
@@ -261,7 +261,7 @@ public class DashBoard extends javax.swing.JFrame {
         Dashboard_Button.setText("Dashboard");
         Dashboard_Button.addActionListener(this::Dashboard_ButtonActionPerformed);
         getContentPane().add(Dashboard_Button);
-        Dashboard_Button.setBounds(50, 130, 250, 50);
+        Dashboard_Button.setBounds(90, 130, 250, 50);
 
         Conforimed_Panel.setBackground(new java.awt.Color(255, 255, 255));
         Conforimed_Panel.setBorder(javax.swing.BorderFactory.createEtchedBorder());

@@ -33,5 +33,9 @@ public class logindata {
 
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
+@Override
+    public String toString() {
+        return "logindata{id=" + user_id + ", username=" + username + ", email=" + email + ", role=" + role + "}";
+    }
 }
 

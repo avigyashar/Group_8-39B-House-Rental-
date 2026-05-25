@@ -1,0 +1,607 @@
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mindex c003733..bd2fbe5 100644[m
+[1m--- a/.gitignore[m
+[1m+++ b/.gitignore[m
+[36m@@ -1 +1,30 @@[m
+[32m+[m[41m[m
+[32m+[m[32m# NetBeans Specific[m[41m[m
+[32m+[m[32m/nbproject/private/[m[41m[m
+[32m+[m[32m/nbproject/Makefile-*.mk[m[41m[m
+[32m+[m[32m/nbproject/Package-*.bash[m[41m[m
+ /build/[m
+[32m+[m[32m/nbbuild/[m[41m[m
+[32m+[m[32m/dist/[m[41m[m
+[32m+[m[32m/nbdist/[m[41m[m
+[32m+[m[32m/nbactions.xml[m[41m[m
+[32m+[m[32m/nb-configuration.xml[m[41m[m
+[32m+[m[32m/.nb-gradle/[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# Compiled Java Classes[m[41m[m
+[32m+[m[32m*.class[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# Package Files[m[41m[m
+[32m+[m[32m*.jar[m[41m[m
+[32m+[m[32m*.war[m[41m[m
+[32m+[m[32m*.ear[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# Log files[m[41m[m
+[32m+[m[32m*.log[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m# OS Specific[m[41m[m
+[32m+[m[32m.DS_Store[m[41m[m
+[32m+[m[32mThumbs.db[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m#database ignore[m[41m[m
+[32m+[m[32m#src/database[m
+\ No newline at end of file[m
+[1mdiff --git a/nbproject/private/private.xml b/nbproject/private/private.xml[m
+[1mindex e57d700..20dc888 100644[m
+[1m--- a/nbproject/private/private.xml[m
+[1m+++ b/nbproject/private/private.xml[m
+[36m@@ -6,12 +6,14 @@[m
+             <file>file:/C:/Users/User/Desktop/Group_8-39B-House-Rental-/src/view/DashBoard.java</file>[m
+             <file>file:/C:/Users/User/Desktop/Group_8-39B-House-Rental-/src/view/Login.java</file>[m
+             <file>file:/C:/Users/User/Desktop/Group_8-39B-House-Rental-/src/view/Registration.java</file>[m
+[31m-            <file>file:/C:/Users/User/Desktop/Group_8-39B-House-Rental-/src/view/Signup.java</file>[m
+             <file>file:/C:/Users/User/Desktop/Group_8-39B-House-Rental-/src/model/logindata.java</file>[m
+             <file>file:/C:/Users/User/Desktop/Group_8-39B-House-Rental-/src/database/MysqlConnector.java</file>[m
+[31m-            <file>file:/C:/Users/User/Desktop/Group_8-39B-House-Rental-/src/dao/UserDAO.java</file>[m
+             <file>file:/C:/Users/User/Desktop/Group_8-39B-House-Rental-/src/images/NewClass.java</file>[m
+             <file>file:/C:/Users/User/Desktop/Group_8-39B-House-Rental-/src/database/db.java</file>[m
+[32m+[m[32m            <file>file:/C:/Users/User/Desktop/Group_8-39B-House-Rental-/src/dao/UserDAO.java</file>[m[41m[m
+[32m+[m[32m            <file>file:/C:/Users/User/Desktop/Group_8-39B-House-Rental-/src/controller/New_class.java</file>[m[41m[m
+[32m+[m[32m            <file>file:/C:/Users/User/Desktop/Group_8-39B-House-Rental-/src/controller/LoginController.java</file>[m[41m[m
+[32m+[m[32m            <file>file:/C:/Users/User/Desktop/Group_8-39B-House-Rental-/src/controller/UserController.java</file>[m[41m[m
+         </group>[m
+     </open-files>[m
+ </project-private>[m
+[1mdiff --git a/src/database/MysqlConnector.java b/src/database/MysqlConnector.java[m
+[1mindex d46cfa6..b8ad84d 100644[m
+[1m--- a/src/database/MysqlConnector.java[m
+[1m+++ b/src/database/MysqlConnector.java[m
+[36m@@ -10,12 +10,12 @@[m [mpublic class MysqlConnector implements db {[m
+     @Override[m
+     public Connection openConnection(){[m
+     try {[m
+[31m-        String username = "frahia";[m
+[31m-        String password= "2007";[m
+[31m-        String database = "monday";[m
+[32m+[m[32m        String username = "root";[m[41m[m
+[32m+[m[32m        String password= "cscorner";[m[41m[m
+[32m+[m[32m        String database = "house_rental_system";[m[41m[m
+     Connection connection;[m
+     connection = DriverManager .getConnection([m
+[31m-            "jdbc:mysql://127.0.0.1:3306/" + database ,username, password [m
+[32m+[m[32m           "jdbc:mysql://localhost:3306/" + database ,username, password[m[41m [m
+           );[m
+              if(connection == null){[m
+ [m
+[1mdiff --git a/src/gharsathi/GharSathi.java b/src/gharsathi/GharSathi.java[m
+[1mindex 5eddd4a..0be6a9f 100644[m
+[1m--- a/src/gharsathi/GharSathi.java[m
+[1m+++ b/src/gharsathi/GharSathi.java[m
+[36m@@ -1,35 +1,26 @@[m
+[31m-/*[m
+[31m- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license[m
+[31m- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template[m
+[31m- */[m
+ package gharsathi;[m
+ [m
+ import Database.MysqlConnector;[m
+[31m-import database.db;[m
+[32m+[m[32mimport java.sql.Connection;[m[41m[m
+ [m
+[31m-/**[m
+[31m- *[m
+[31m- * @author Safal[m
+[31m- */[m
+ public class GharSathi {[m
+ [m
+[32m+[m[32m    public static void main(String[] args) {[m[41m[m
+ [m
+[32m+[m[32m        MysqlConnector db = new MysqlConnector();[m[41m[m
+ [m
+[31m-/**[m
+[31m- *[m
+[31m- * @author Safal[m
+[31m- */[m
+[31m-public class JavaApplication1 {[m
+[32m+[m[32m        Connection conn = db.openConnection();[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m        if (conn != null) {[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m            System.out.println("Program running successfully");[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m        } else {[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m            System.out.println("Database connection failed");[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m        }[m[41m[m
+ [m
+[31m-    /**[m
+[31m-     * @param args the command line arguments[m
+[31m-     */[m
+[31m-    public static void main(String[] args) {[m
+[31m-        // TODO code application logic here[m
+[31m-        db database = new MysqlConnector();[m
+[31m-        database.openConnection();[m
+     }[m
+[31m-    [m
+[31m-}[m
+ }[m
+ [m
+[1mdiff --git a/src/model/logindata.java b/src/model/logindata.java[m
+[1mindex fada4ab..2179136 100644[m
+[1m--- a/src/model/logindata.java[m
+[1m+++ b/src/model/logindata.java[m
+[36m@@ -2,7 +2,7 @@[m
+  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license[m
+  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template[m
+  */[m
+[31m-<<<<<<< HEAD[m
+[32m+[m[41m[m
+ package model;[m
+ [m
+ /**[m
+[36m@@ -47,77 +47,4 @@[m [mpublic class logindata {[m
+     }[m
+     [m
+     [m
+[31m-=======[m
+[31m-[m
+[31m-package model;[m
+[31m-[m
+[31m- public class logindata  {[m
+[31m-[m
+[31m-    private int id;[m
+[31m-    private String username;[m
+[31m-    private String email;[m
+[31m-    private String phone;[m
+[31m-    private String password;[m
+[31m-    private String role;[m
+[31m-[m
+[31m-    public User() {[m
+[31m-    }[m
+[31m-[m
+[31m-    public User(String username, String email,String phone, String password, String role) {[m
+[31m-[m
+[31m-        this.username = username;[m
+[31m-        this.email = email;[m
+[31m-        this.phone = phone;[m
+[31m-        this.password = password;[m
+[31m-        this.role = role;[m
+[31m-    }[m
+[31m-[m
+[31m-    public int getId() {[m
+[31m-        return id;[m
+[31m-    }[m
+[31m-[m
+[31m-    public void setId(int id) {[m
+[31m-        this.id = id;[m
+[31m-    }[m
+[31m-[m
+[31m-    public String getUsername() {[m
+[31m-        return username;[m
+[31m-    }[m
+[31m-[m
+[31m-    public void setUsername(String username) {[m
+[31m-        this.username = username;[m
+[31m-    }[m
+[31m-[m
+[31m-    public String getEmail() {[m
+[31m-        return email;[m
+[31m-    }[m
+[31m-[m
+[31m-    public void setEmail(String email) {[m
+[31m-        this.email = email;[m
+[31m-    }[m
+[31m-[m
+[31m-    public String getPhone() {[m
+[31m-        return phone;[m
+[31m-    }[m
+[31m-[m
+[31m-    public void setPhone(String phone) {[m
+[31m-        this.phone = phone;[m
+[31m-    }[m
+[31m-[m
+[31m-    public String getPassword() {[m
+[31m-        return password;[m
+[31m-    }[m
+[31m-[m
+[31m-    public void setPassword(String password) {[m
+[31m-        this.password = password;[m
+[31m-    }[m
+[31m-[m
+[31m-    public String getRole() {[m
+[31m-        return role;[m
+[31m-    }[m
+[31m-[m
+[31m-    public void setRole(String role) {[m
+[31m-        this.role = role;[m
+[31m-    }[m
+[31m->>>>>>> Safal_Branch[m
+[31m-}[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/view/Login.form b/src/view/Login.form[m
+[1mindex a8f51c2..a96a560 100644[m
+[1m--- a/src/view/Login.form[m
+[1m+++ b/src/view/Login.form[m
+[36m@@ -761,9 +761,9 @@[m
+         </Constraint>[m
+       </Constraints>[m
+     </Component>[m
+[31m-    <Component class="javax.swing.JTextField" name="jTextField1">[m
+[32m+[m[32m    <Component class="javax.swing.JTextField" name="txtPassword">[m
+       <Events>[m
+[31m-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>[m
+[32m+[m[32m        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPasswordActionPerformed"/>[m
+       </Events>[m
+       <Constraints>[m
+         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">[m
+[36m@@ -771,9 +771,9 @@[m
+         </Constraint>[m
+       </Constraints>[m
+     </Component>[m
+[31m-    <Component class="javax.swing.JTextField" name="jTextField3">[m
+[32m+[m[32m    <Component class="javax.swing.JTextField" name="txtUsername">[m
+       <Events>[m
+[31m-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField3ActionPerformed"/>[m
+[32m+[m[32m        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUsernameActionPerformed"/>[m
+       </Events>[m
+       <Constraints>[m
+         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">[m
+[1mdiff --git a/src/view/Login.java b/src/view/Login.java[m
+[1mindex ca98b47..cf42769 100644[m
+[1m--- a/src/view/Login.java[m
+[1m+++ b/src/view/Login.java[m
+[36m@@ -4,6 +4,9 @@[m
+  */[m
+ package view;[m
+ [m
+[32m+[m[32mimport controller.LoginController;[m
+[32m+[m[32mimport javax.swing.JOptionPane;[m
+[32m+[m
+ /**[m
+  *[m
+  * @author Safal[m
+[36m@@ -72,8 +75,8 @@[m [mpublic class Login extends javax.swing.JFrame {[m
+         jLabel42 = new javax.swing.JLabel();[m
+         jLabel30 = new javax.swing.JLabel();[m
+         jLabel9 = new javax.swing.JLabel();[m
+[31m-        jTextField1 = new javax.swing.JTextField();[m
+[31m-        jTextField3 = new javax.swing.JTextField();[m
+[32m+[m[32m        txtPassword = new javax.swing.JTextField();[m
+[32m+[m[32m        txtUsername = new javax.swing.JTextField();[m
+ [m
+         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);[m
+         setSize(new java.awt.Dimension(1536, 864));[m
+[36m@@ -348,19 +351,49 @@[m [mpublic class Login extends javax.swing.JFrame {[m
+         getContentPane().add(jLabel9);[m
+         jLabel9.setBounds(1260, 440, 40, 40);[m
+ [m
+[31m-        jTextField1.addActionListener(this::jTextField1ActionPerformed);[m
+[31m-        getContentPane().add(jTextField1);[m
+[31m-        jTextField1.setBounds(660, 560, 650, 50);[m
+[32m+[m[32m        txtPassword.addActionListener(this::txtPasswordActionPerformed);[m
+[32m+[m[32m        getContentPane().add(txtPassword);[m
+[32m+[m[32m        txtPassword.setBounds(660, 560, 650, 50);[m
+ [m
+[31m-        jTextField3.addActionListener(this::jTextField3ActionPerformed);[m
+[31m-        getContentPane().add(jTextField3);[m
+[31m-        jTextField3.setBounds(660, 440, 650, 50);[m
+[32m+[m[32m        txtUsername.addActionListener(this::txtUsernameActionPerformed);[m
+[32m+[m[32m        getContentPane().add(txtUsername);[m
+[32m+[m[32m        txtUsername.setBounds(660, 440, 650, 50);[m
+ [m
+         pack();[m
+     }// </editor-fold>//GEN-END:initComponents[m
+ [m
+     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed[m
+[31m-        // TODO add your handling code here:[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    String usernameOrEmail = txtUsername.getText().trim();[m
+[32m+[m[32m    String password = txtPassword.getText().trim();[m
+[32m+[m
+[32m+[m[32m    if (usernameOrEmail.isEmpty() || password.isEmpty()) {[m
+[32m+[m[32m        JOptionPane.showMessageDialog(this, "Please fill all fields!");[m
+[32m+[m[32m        return;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    LoginController controller = new LoginController();[m
+[32m+[m
+[32m+[m[32m    boolean success = controller.loginUser(usernameOrEmail, password);[m
+[32m+[m
+[32m+[m[32m    if (success) {[m
+[32m+[m
+[32m+[m[32m        JOptionPane.showMessageDialog(this, "Login Successful!");[m
+[32m+[m
+[32m+[m[32m        // OPEN DASHBOARD[m
+[32m+[m[32m        DashBoard dash = new DashBoard();[m
+[32m+[m[32m        dash.setVisible(true);[m
+[32m+[m
+[32m+[m[32m        // CLOSE LOGIN WINDOW[m
+[32m+[m[32m        this.dispose();[m
+[32m+[m
+[32m+[m[32m    } else {[m
+[32m+[m
+[32m+[m[32m        JOptionPane.showMessageDialog(this, "Invalid username or password!");[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m
+     }//GEN-LAST:event_jButton2ActionPerformed[m
+ [m
+     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed[m
+[36m@@ -371,13 +404,13 @@[m [mpublic class Login extends javax.swing.JFrame {[m
+         // TODO add your handling code here:[m
+     }//GEN-LAST:event_jButton5ActionPerformed[m
+ [m
+[31m-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed[m
+[32m+[m[32m    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed[m
+         // TODO add your handling code here:[m
+[31m-    }//GEN-LAST:event_jTextField1ActionPerformed[m
+[32m+[m[32m    }//GEN-LAST:event_txtPasswordActionPerformed[m
+ [m
+[31m-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed[m
+[32m+[m[32m    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed[m
+         // TODO add your handling code here:[m
+[31m-    }//GEN-LAST:event_jTextField3ActionPerformed[m
+[32m+[m[32m    }//GEN-LAST:event_txtUsernameActionPerformed[m
+ [m
+     /**[m
+      * @param args the command line arguments[m
+[36m@@ -449,7 +482,7 @@[m [mpublic class Login extends javax.swing.JFrame {[m
+     private javax.swing.JLabel jLabel8;[m
+     private javax.swing.JLabel jLabel9;[m
+     private javax.swing.JPanel jPanel1;[m
+[31m-    private javax.swing.JTextField jTextField1;[m
+[31m-    private javax.swing.JTextField jTextField3;[m
+[32m+[m[32m    private javax.swing.JTextField txtPassword;[m
+[32m+[m[32m    private javax.swing.JTextField txtUsername;[m
+     // End of variables declaration//GEN-END:variables[m
+ }[m
+[1mdiff --git a/src/view/Registration.form b/src/view/Registration.form[m
+[1mindex ab7a2be..6ebf8bc 100644[m
+[1m--- a/src/view/Registration.form[m
+[1m+++ b/src/view/Registration.form[m
+[36m@@ -299,7 +299,7 @@[m
+       </Events>[m
+       <Constraints>[m
+         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">[m
+[31m-          <AbsoluteConstraints x="820" y="710" width="160" height="50"/>[m
+[32m+[m[32m          <AbsoluteConstraints x="660" y="710" width="160" height="50"/>[m
+         </Constraint>[m
+       </Constraints>[m
+     </Component>[m
+[36m@@ -527,33 +527,57 @@[m
+         </Constraint>[m
+       </Constraints>[m
+     </Component>[m
+[31m-    <Component class="javax.swing.JTextField" name="jTextField3">[m
+[32m+[m[32m    <Component class="javax.swing.JTextField" name="jTextField4">[m
+       <Events>[m
+[31m-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField3ActionPerformed"/>[m
+[32m+[m[32m        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField4ActionPerformed"/>[m
+       </Events>[m
+       <Constraints>[m
+         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">[m
+[31m-          <AbsoluteConstraints x="650" y="610" width="650" height="50"/>[m
+[32m+[m[32m          <AbsoluteConstraints x="650" y="390" width="650" height="50"/>[m
+         </Constraint>[m
+       </Constraints>[m
+     </Component>[m
+[31m-    <Component class="javax.swing.JTextField" name="jTextField4">[m
+[32m+[m[32m    <Component class="javax.swing.JTextField" name="jTextField5">[m
+       <Events>[m
+[31m-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField4ActionPerformed"/>[m
+[32m+[m[32m        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField5ActionPerformed"/>[m
+       </Events>[m
+       <Constraints>[m
+         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">[m
+[31m-          <AbsoluteConstraints x="650" y="390" width="650" height="50"/>[m
+[32m+[m[32m          <AbsoluteConstraints x="650" y="510" width="650" height="50"/>[m
+         </Constraint>[m
+       </Constraints>[m
+     </Component>[m
+[31m-    <Component class="javax.swing.JTextField" name="jTextField5">[m
+[32m+[m[32m    <Component class="javax.swing.JPasswordField" name="txtPassword">[m
+       <Events>[m
+[31m-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField5ActionPerformed"/>[m
+[32m+[m[32m        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPasswordActionPerformed"/>[m
+       </Events>[m
+       <Constraints>[m
+         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">[m
+[31m-          <AbsoluteConstraints x="650" y="510" width="650" height="50"/>[m
+[32m+[m[32m          <AbsoluteConstraints x="650" y="610" width="650" height="50"/>[m
+[32m+[m[32m        </Constraint>[m
+[32m+[m[32m      </Constraints>[m
+[32m+[m[32m    </Component>[m
+[32m+[m[32m    <Component class="javax.swing.JButton" name="btnNext">[m
+[32m+[m[32m      <Properties>[m
+[32m+[m[32m        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">[m
+[32m+[m[32m          <Font name="Segoe UI" size="24" style="1"/>[m
+[32m+[m[32m        </Property>[m
+[32m+[m[32m        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">[m
+[32m+[m[32m          <Color blue="33" green="33" red="33" type="rgb"/>[m
+[32m+[m[32m        </Property>[m
+[32m+[m[32m        <Property name="text" type="java.lang.String" value="Continue"/>[m
+[32m+[m[32m        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">[m
+[32m+[m[32m          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">[m
+[32m+[m[32m            <LineBorder/>[m
+[32m+[m[32m          </Border>[m
+[32m+[m[32m        </Property>[m
+[32m+[m[32m      </Properties>[m
+[32m+[m[32m      <Events>[m
+[32m+[m[32m        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNextActionPerformed"/>[m
+[32m+[m[32m      </Events>[m
+[32m+[m[32m      <Constraints>[m
+[32m+[m[32m        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">[m
+[32m+[m[32m          <AbsoluteConstraints x="1120" y="710" width="160" height="50"/>[m
+         </Constraint>[m
+       </Constraints>[m
+     </Component>[m
+[1mdiff --git a/src/view/Registration.java b/src/view/Registration.java[m
+[1mindex 8566842..5b07d2d 100644[m
+[1m--- a/src/view/Registration.java[m
+[1m+++ b/src/view/Registration.java[m
+[36m@@ -3,13 +3,17 @@[m
+  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template[m
+  */[m
+ package view;[m
+[32m+[m[32mimport controller.UserController;[m
+[32m+[m[32mimport java.awt.HeadlessException;[m
+[32m+[m[32mimport javax.swing.JOptionPane;[m
+[32m+[m[32mimport model.logindata;[m
+ [m
+ /**[m
+  *[m
+  * @author Safal[m
+  */[m
+ public class Registration extends javax.swing.JFrame {[m
+[31m-    [m
+[32m+[m
+     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Registration.class.getName());[m
+ [m
+     /**[m
+[36m@@ -58,9 +62,10 @@[m [mpublic class Registration extends javax.swing.JFrame {[m
+         jLabel27 = new javax.swing.JLabel();[m
+         jLabel28 = new javax.swing.JLabel();[m
+         jLabel29 = new javax.swing.JLabel();[m
+[31m-        jTextField3 = new javax.swing.JTextField();[m
+         jTextField4 = new javax.swing.JTextField();[m
+         jTextField5 = new javax.swing.JTextField();[m
+[32m+[m[32m        txtPassword = new javax.swing.JPasswordField();[m
+[32m+[m[32m        btnNext = new javax.swing.JButton();[m
+ [m
+         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);[m
+         setPreferredSize(new java.awt.Dimension(1536, 864));[m
+[36m@@ -165,7 +170,7 @@[m [mpublic class Registration extends javax.swing.JFrame {[m
+         jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));[m
+         jButton1.addActionListener(this::jButton1ActionPerformed);[m
+         getContentPane().add(jButton1);[m
+[31m-        jButton1.setBounds(820, 710, 160, 50);[m
+[32m+[m[32m        jButton1.setBounds(660, 710, 160, 50);[m
+ [m
+         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/account_circle.png"))); // NOI18N[m
+         getContentPane().add(jLabel8);[m
+[36m@@ -249,10 +254,6 @@[m [mpublic class Registration extends javax.swing.JFrame {[m
+         getContentPane().add(jLabel29);[m
+         jLabel29.setBounds(60, 740, 680, 20);[m
+ [m
+[31m-        jTextField3.addActionListener(this::jTextField3ActionPerformed);[m
+[31m-        getContentPane().add(jTextField3);[m
+[31m-        jTextField3.setBounds(650, 610, 650, 50);[m
+[31m-[m
+         jTextField4.addActionListener(this::jTextField4ActionPerformed);[m
+         getContentPane().add(jTextField4);[m
+         jTextField4.setBounds(650, 390, 650, 50);[m
+[36m@@ -261,16 +262,58 @@[m [mpublic class Registration extends javax.swing.JFrame {[m
+         getContentPane().add(jTextField5);[m
+         jTextField5.setBounds(650, 510, 650, 50);[m
+ [m
+[32m+[m[32m        txtPassword.addActionListener(this::txtPasswordActionPerformed);[m
+[32m+[m[32m        getContentPane().add(txtPassword);[m
+[32m+[m[32m        txtPassword.setBounds(650, 610, 650, 50);[m
+[32m+[m
+[32m+[m[32m        btnNext.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N[m
+[32m+[m[32m        btnNext.setForeground(new java.awt.Color(51, 51, 51));[m
+[32m+[m[32m        btnNext.setText("Continue");[m
+[32m+[m[32m        btnNext.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));[m
+[32m+[m[32m        btnNext.addActionListener(this::btnNextActionPerformed);[m
+[32m+[m[32m        getContentPane().add(btnNext);[m
+[32m+[m[32m        btnNext.setBounds(1120, 710, 160, 50);[m
+[32m+[m
+         pack();[m
+     }// </editor-fold>//GEN-END:initComponents[m
+ [m
+     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed[m
+[31m-        // TODO add your handling code here:[m
+[31m-    }//GEN-LAST:event_jButton1ActionPerformed[m
+ [m
+[31m-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed[m
+[31m-        // TODO add your handling code here:[m
+[31m-    }//GEN-LAST:event_jTextField3ActionPerformed[m
+[32m+[m[32m    String username = jTextField4.getText().trim();[m
+[32m+[m[32m    String email = jTextField5.getText().trim();[m
+[32m+[m[32m    String password = new String(txtPassword.getPassword()).trim();[m
+[32m+[m
+[32m+[m[32m    // basic validation[m
+[32m+[m[32m    if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {[m
+[32m+[m[32m        JOptionPane.showMessageDialog(this, "Please fill all fields!");[m
+[32m+[m[32m        return;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    try {[m
+[32m+[m[32m        logindata user = new logindata(username, email, password);[m
+[32m+[m
+[32m+[m[32m        UserController controller = new UserController();[m
+[32m+[m
+[32m+[m[32m        boolean success = controller.registerUser(user);[m
+[32m+[m
+[32m+[m[32m        if (success) {[m
+[32m+[m[32m            JOptionPane.showMessageDialog(this, "User Registered Successfully!");[m
+[32m+[m[41m            [m
+[32m+[m[32m            // clear fields after success[m
+[32m+[m[32m            jTextField4.setText("");[m
+[32m+[m[32m            jTextField5.setText("");[m
+[32m+[m[32m            txtPassword.setText("");[m
+[32m+[m
+[32m+[m[32m        } else {[m
+[32m+[m[32m            JOptionPane.showMessageDialog(this, "Registration Failed!");[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m    } catch (HeadlessException e) {[m
+[32m+[m[32m        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    }//GEN-LAST:event_jButton1ActionPerformed[m
+ [m
+     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed[m
+         // TODO add your handling code here:[m
+[36m@@ -280,10 +323,23 @@[m [mpublic class Registration extends javax.swing.JFrame {[m
+         // TODO add your handling code here:[m
+     }//GEN-LAST:event_jTextField5ActionPerformed[m
+ [m
+[32m+[m[32m    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed[m
+[32m+[m[32m        // TODO add your handling code here:[m
+[32m+[m[32m    }//GEN-LAST:event_txtPasswordActionPerformed[m
+[32m+[m
+[32m+[m[32m    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    Login login = new Login();[m
+[32m+[m[32m    login.setVisible(true);[m
+[32m+[m
+[32m+[m[32m    this.dispose();     // TODO add your handling code here:[m
+[32m+[m[32m    }//GEN-LAST:event_btnNextActionPerformed[m
+[32m+[m
+     /**[m
+      * @param args the command line arguments[m
+      */[m
+[31m-    public static void main(String args[]) {[m
+[32m+[m[32m   public static void main(String args[]) {[m
+         /* Set the Nimbus look and feel */[m
+         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">[m
+         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.[m
+[36m@@ -305,7 +361,9 @@[m [mpublic class Registration extends javax.swing.JFrame {[m
+         java.awt.EventQueue.invokeLater(() -> new Registration().setVisible(true));[m
+     }[m
+ [m
+[32m+[m
+     // Variables declaration - do not modify//GEN-BEGIN:variables[m
+[32m+[m[32m    private javax.swing.JButton btnNext;[m
+     private javax.swing.JButton jButton1;[m
+     private javax.swing.JLabel jLabel1;[m
+     private javax.swing.JLabel jLabel10;[m
+[36m@@ -336,8 +394,8 @@[m [mpublic class Registration extends javax.swing.JFrame {[m
+     private javax.swing.JLabel jLabel8;[m
+     private javax.swing.JLabel jLabel9;[m
+     private javax.swing.JPanel jPanel1;[m
+[31m-    private javax.swing.JTextField jTextField3;[m
+     private javax.swing.JTextField jTextField4;[m
+     private javax.swing.JTextField jTextField5;[m
+[32m+[m[32m    private javax.swing.JPasswordField txtPassword;[m
+     // End of variables declaration//GEN-END:variables[m
+ }[m

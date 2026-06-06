@@ -1,0 +1,61 @@
+
+
+    private JPanel loadingOverlay;
+    private int spinAngle = 0;
+    private java.util.Timer spinTimer;
+
+    private void buildLoadingOverlay(JPanel root, int W) {
+        loadingOverlay = new JPanel(null) {
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setColor(new Color(245, 245, 245, 200));
+                g2.fillRect(0, 0, getWidth(), getHeight());
+                int cx = getWidth()/2, cy = getHeight()/2 - 20;
+                g2.setColor(new Color(200, 200, 200));
+                g2.setStroke(new BasicStroke(5f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+                g2.drawArc(cx-24, cy-24, 48, 48, 0, 360);
+                g2.setColor(new Color(13, 71, 161));
+                g2.setStroke(new BasicStroke(5f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+                g2.drawArc(cx-24, cy-24, 48, 48, spinAngle, 90);
+                g2.setColor(new Color(25, 25, 25));
+                g2.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+                FontMetrics fm = g2.getFontMetrics();
+                g2.drawString("Searching...", cx - fm.stringWidth("Searching...")/2, cy + 44);
+            }
+        };
+        loadingOverlay.setBounds(20, 380, W - 40, getHeight() - 416);
+        loadingOverlay.setVisible(false);
+        loadingOverlay.setOpaque(false);
+        root.add(loadingOverlay);
+        root.setComponentZOrder(loadingOverlay, 0);
+    }
+
+    private void showLoading(boolean show) {
+        if (show) {
+            loadingOverlay.setVisible(true);
+            if (spinTimer != null) spinTimer.cancel();
+            spinTimer = new java.util.Timer();
+            spinTimer.scheduleAtFixedRate(new java.util.TimerTask() {
+                public void run() {
+                    spinAngle = (spinAngle + 12) % 360;
+                    if (loadingOverlay != null) loadingOverlay.repaint();
+                }
+            }, 0, 30);
+        } else {
+            if (spinTimer != null) { spinTimer.cancel(); spinTimer = null; }
+            loadingOverlay.setVisible(false);
+        }
+    }
+
+    private void applyFiltersWithLoading() {
+        showLoading(true);
+        new java.util.Timer().schedule(new java.util.TimerTask() {
+            public void run() {
+                SwingUtilities.invokeLater(() -> {
+                    applyFilters();
+                    showLoading(false);
+                });
+            }
+        }, 600);
+    }

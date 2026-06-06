@@ -1,0 +1,124 @@
+ private static final String[] SLIDER_LABELS = {
+        "Find Your Dream Home in Nepal",
+        "Affordable Rentals Across the Valley",
+        "Luxury Villas · Cozy Flats · Family Homes",
+    };
+    private static final Color[] SLIDER_COLORS = {
+        new Color(13, 71, 161),
+        new Color(0, 130, 120),
+        new Color(100, 60, 160),
+    };
+    private int sliderIndex = 0;
+    private java.util.Timer sliderTimer;
+    private JPanel sliderPanel;
+    private JLabel sliderLabel;
+    private JPanel sliderDots
+ 
+    private void buildImageSlider(JPanel root, int W) {
+        sliderPanel = new JPanel(null) {
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                Color c = SLIDER_COLORS[sliderIndex];
+                GradientPaint gp = new GradientPaint(0, 0, c, getWidth(), getHeight(), c.darker().darker());
+                g2.setPaint(gp);
+                g2.fillRect(0, 0, getWidth(), getHeight());
+                g2.setColor(new Color(255, 255, 255, 18));
+                for (int xi = 0; xi < getWidth(); xi += 40) g2.drawLine(xi, 0, xi, getHeight());
+                for (int yi = 0; yi < getHeight(); yi += 40) g2.drawLine(0, yi, getWidth(), yi);
+            }
+        };
+        sliderPanel.setBounds(0, 116, W, 130);
+        root.add(sliderPanel);
+ 
+        sliderLabel = new JLabel(SLIDER_LABELS[sliderIndex], SwingConstants.CENTER);
+        sliderLabel.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        sliderLabel.setForeground(Color.WHITE);
+        sliderLabel.setBounds(0, 28, W, 36);
+        sliderPanel.add(sliderLabel);
+ 
+        JLabel subLabel = new JLabel("Browse " + ALL_HOUSES.length + " properties across Nepal", SwingConstants.CENTER);
+        subLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        subLabel.setForeground(new Color(220, 220, 255));
+        subLabel.setBounds(0, 66, W, 22);
+        sliderPanel.add(subLabel);
+ 
+        sliderDots = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 0));
+        sliderDots.setOpaque(false);
+        sliderDots.setBounds(0, 96, W, 20);
+        updateDots();
+        sliderPanel.add(sliderDots);
+ 
+        JButton prev = arrowBtn("<");
+        prev.setBounds(12, 44, 36, 36);
+        prev.addActionListener(e -> { sliderIndex = (sliderIndex - 1 + SLIDER_LABELS.length) % SLIDER_LABELS.length; updateSlide(); });
+        sliderPanel.add(prev);
+ 
+        JButton next = arrowBtn(">");
+        next.setBounds(W - 48, 44, 36, 36);
+        next.addActionListener(e -> { sliderIndex = (sliderIndex + 1) % SLIDER_LABELS.length; updateSlide(); });
+        sliderPanel.add(next);
+ 
+        if (sliderTimer != null) sliderTimer.cancel();
+        sliderTimer = new java.util.Timer();
+        sliderTimer.scheduleAtFixedRate(new java.util.TimerTask() {
+            public void run() {
+                SwingUtilities.invokeLater(() -> {
+                    sliderIndex = (sliderIndex + 1) % SLIDER_LABELS.length;
+                    updateSlide();
+                });
+            }
+        }, 3000, 3000);
+    }
+ 
+    private JButton arrowBtn(String txt) {
+        JButton b = new JButton(txt) {
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setColor(new Color(255, 255, 255, 60));
+                g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+                g2.setColor(Color.WHITE);
+                g2.setFont(new Font("Segoe UI", Font.BOLD, 16));
+                FontMetrics fm = g2.getFontMetrics();
+                g2.drawString(txt, (getWidth()-fm.stringWidth(txt))/2, (getHeight()+fm.getAscent()-fm.getDescent())/2);
+            }
+        };
+        b.setOpaque(false); b.setContentAreaFilled(false);
+        b.setBorderPainted(false); b.setFocusPainted(false);
+        b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        return b;
+    }
+ 
+    private void updateSlide() {
+        if (sliderLabel == null) return;
+        sliderLabel.setText(SLIDER_LABELS[sliderIndex]);
+        updateDots();
+        sliderPanel.repaint();
+    }
+ 
+    private void updateDots() {
+        if (sliderDots == null) return;
+        sliderDots.removeAll();
+        for (int i = 0; i < SLIDER_LABELS.length; i++) {
+            final int fi = i;
+            JPanel dot = new JPanel() {
+                protected void paintComponent(Graphics g) {
+                    Graphics2D g2 = (Graphics2D) g;
+                    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                    g2.setColor(fi == sliderIndex ? Color.WHITE : new Color(255, 255, 255, 100));
+                    g2.fillOval(0, 0, getWidth(), getHeight());
+                }
+            };
+            dot.setOpaque(false);
+            dot.setPreferredSize(new Dimension(fi == sliderIndex ? 20 : 8, 8));
+            dot.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            dot.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) { sliderIndex = fi; updateSlide(); }
+            });
+            sliderDots.add(dot);
+        }
+        sliderDots.revalidate();
+        sliderDots.repaint();
+    }
+ 
